@@ -19,16 +19,24 @@ function partitionBooksByBorrowedStatus(books) {
   //hmm maybe theres a more efficient way to do this, but it worked!
   return [borrowed, notBorrowed]
 }
+//********************Helper*******************************
+function getBorrowerIds(book){
+  const {borrows} = book;
+  const borrowerIds = borrows.map((index) => index)
+  return borrowerIds
+}
 
 function getBorrowersForBook(book, accounts) {
   //return an array for a book of all borrowers with their info and return status. 
   //limit that to 10 borrowers.
   
   //I think this means the book.borrows, which means create a var for book.borrows.ids
-  const {borrows} = book;
+  //const {borrows} = book;
   //this map is just to cleanly create an array to match against the accounts
   //to speed up the algo I should limit it to the first 10 somehow. 
-  const borrowerIds = borrows.map((index) => index)
+  //const borrowerIds = borrows.map((index) => index)
+  
+  const borrowerIds = getBorrowerIds(book)
   let shortenedBorrowerIds = borrowerIds.slice(0,10);
   //now I have to match each borrowerId to the accounts.id and add the object to an array
   
